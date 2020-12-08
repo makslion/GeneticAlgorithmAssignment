@@ -4,7 +4,7 @@
 1. Download source code
 2. in _Project.java_ uncomment desired _demo..._ method.
 3. Run _Project.java_ 
-4. Adjust _Utilities.Constants_ to chance initial conditions. 
+4. Adjust _Utilities.Constants_ to change initial conditions. 
 5. Enjoy
 
 ### Requirements:
