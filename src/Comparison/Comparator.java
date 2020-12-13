@@ -1,3 +1,5 @@
+package Comparison;
+
 import Factory.FancyGAFactory;
 import Factory.SimpleGAFactory;
 import GeneticAlgorithmPackage.Components.GeneticAlgorithmCallback;
@@ -34,6 +36,15 @@ public class Comparator implements GeneticAlgorithmCallback {
     @Override
     public void populationCallback(ArrayList<Route> population) {
         // access to the whole population from the GA
+    }
+
+    public void runGA(){
+
+    }
+
+
+    public void compare(){
+
     }
 
 

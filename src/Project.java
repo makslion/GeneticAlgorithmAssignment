@@ -1,8 +1,7 @@
+import Comparison.Comparator;
 import Factory.FancyGAFactory;
 import Factory.SimpleGAFactory;
-import GeneticAlgorithmPackage.FancyGAsample;
 import GeneticAlgorithmPackage.GeneticAlgorithm;
-import GeneticAlgorithmPackage.SimpleGAsample;
 import Helpers.Constants;
 import Population.Route;
 import Population.World;
