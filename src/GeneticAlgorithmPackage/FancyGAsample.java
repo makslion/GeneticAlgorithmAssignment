@@ -1,5 +1,6 @@
 package GeneticAlgorithmPackage;
 
+import Factory.AbstractFactory;
 import GeneticAlgorithmPackage.Components.ReproducerUniform;
 import GeneticAlgorithmPackage.Components.SelectorTournament;
 import Population.Route;

@@ -1,5 +1,7 @@
 package GeneticAlgorithmPackage;
 
+import Factory.AbstractFactory;
+import GeneticAlgorithmPackage.Components.GeneticAlgorithmCallback;
 import Helpers.Constants;
 import GeneticAlgorithmPackage.Components.Reproducer;
 import GeneticAlgorithmPackage.Components.Selector;
@@ -14,10 +16,11 @@ public class GeneticAlgorithm extends Thread{
     AbstractFactory factory;
 
     // components
-    protected Selector selector;        //TODO once factory implemented - change to private
-    protected Reproducer reproducer;    //TODO once factory implemented - change to private
+    public Selector selector;
+    public Reproducer reproducer;
     private ArrayList<Route> population;
     private Route theBestRoute;
+    private GeneticAlgorithmCallback callback;
 
     //parameters
     private int generationsToDo = Constants.DEFAULT_GENERATIONS;
@@ -40,8 +43,6 @@ public class GeneticAlgorithm extends Thread{
         createAlgorithm();
         this.population = population;
     }
-
-
 
     private void createAlgorithm(){
         factory.createTheThing(this);
@@ -128,9 +129,13 @@ public class GeneticAlgorithm extends Thread{
         }
 //        System.out.println("saving route with length "+candidate.getRouteLength()+" as the best");
         theBestRoute = candidate;
+
+        // check for a callback
+        if (callback != null){
+            callback.bestRouteCallback(theBestRoute);
+            callback.populationCallback(population);
+        }
     }
-
-
 
     public Route getTheBestRoute(){
         if (theBestRoute != null)
@@ -141,6 +146,7 @@ public class GeneticAlgorithm extends Thread{
     }
 
 
-
-
+    public void setCallback(GeneticAlgorithmCallback callback) {
+        this.callback = callback;
+    }
 }

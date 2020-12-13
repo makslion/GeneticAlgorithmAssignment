@@ -1,3 +1,5 @@
+import Factory.FancyGAFactory;
+import Factory.SimpleGAFactory;
 import GeneticAlgorithmPackage.FancyGAsample;
 import GeneticAlgorithmPackage.GeneticAlgorithm;
 import GeneticAlgorithmPackage.SimpleGAsample;
@@ -13,9 +15,9 @@ public class Project {
 
         // demoPopulation();
 
-        demoGA();
+        // demoGA();
 
-
+        comparatorDemo();
     }
 
 
@@ -30,6 +32,15 @@ public class Project {
     }
 
 
+    private static void comparatorDemo(){
+        World.getInstance().setWorld(Constants.WORLD_SIZE_X, Constants.WORLD_SIZE_Y, Constants.NUMBER_OF_CITIES,Constants.NUMBER_OF_ROUTES);
+        ArrayList<Route> initialPopulation = World.getInstance().getRouteList();
+
+        Comparator comparator = new Comparator(initialPopulation);
+        comparator.demoAlgorithms();
+    }
+
+
     private static void demoGA(){
 
         World.getInstance().setWorld(Constants.WORLD_SIZE_X, Constants.WORLD_SIZE_Y, Constants.NUMBER_OF_CITIES,Constants.NUMBER_OF_ROUTES);
@@ -40,8 +51,8 @@ public class Project {
 
         // prepare
         for (int i = 0; i < Constants.NUMBER_OF_GA_INSTANCES; i++){
-            simpleAlgorithms.add(new SimpleGAsample((ArrayList<Route>) initialPopulation.clone()));
-            fancyAlgorithms.add(new FancyGAsample((ArrayList<Route>) initialPopulation.clone()));
+            simpleAlgorithms.add(new GeneticAlgorithm(new SimpleGAFactory(),(ArrayList<Route>) initialPopulation.clone()));
+            fancyAlgorithms.add(new GeneticAlgorithm(new FancyGAFactory(), (ArrayList<Route>) initialPopulation.clone()));
         }
 
         // start evolution
