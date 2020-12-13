@@ -4,6 +4,7 @@ import Population.City;
 import Population.Route;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -22,7 +23,7 @@ public class Utilities {
     }
 
     // remove duplicated cities
-    public static ArrayList<Integer> removeDuplicates(ArrayList<Integer> route, ArrayList<City> cities){
+    public static ArrayList<Integer> filterDuplicates(ArrayList<Integer> route, ArrayList<City> cities){
 
         ArrayList<Integer> duplicateIndex = new ArrayList<>();
         ArrayList<Integer> duplicateID = new ArrayList<>();
@@ -71,7 +72,6 @@ public class Utilities {
 //            for (Integer integer : blacklist)
 //                System.out.print(integer+" ");
 //            System.out.println();
-
 
             // replace duplicates with missing cities
             for (Integer blacklistElement : blacklist){
