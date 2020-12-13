@@ -9,11 +9,22 @@
 
 ### Requirements:
 - [x] Singleton Pattern
-- [ ] Factory Pattern
-- [ ] Strategy Pattern
+- [x] Factory Pattern
+- [x] Strategy Pattern
 - [x] Genetic Algorithm 
 
 ## Changelog:
+
+### version 0.6
+* Implementation of the Strategy pattern
+* Comparator to compare the performance 
+
+
+### version 0.5
+* Implementation of the Abstract Factory
+* Added Callback for the Genetic Algorithm 
+
+
 ### version 0.4
 * Reorganized package structure 
 * Implementation of Genetic Algorithm concept 

@@ -18,7 +18,6 @@ public class ResultComparator extends Comparator {
 
 	@Override
 	public void compare() {
-
 		GeneticAlgorithm simpleGA = new GeneticAlgorithm(new SimpleGAFactory(), (ArrayList<Route>) initialPopulation.clone());
 		simpleGA.setCallback(this);
 		simpleGA.start();
