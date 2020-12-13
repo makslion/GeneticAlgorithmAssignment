@@ -10,13 +10,13 @@ import java.util.ArrayList;
 
 public class FancyGAsample extends GeneticAlgorithm {
 
-    public FancyGAsample(ArrayList<Route> population, int generationsToDo, int mutationRate) {
-        super(population, generationsToDo, mutationRate);
+    public FancyGAsample(AbstractFactory factory, ArrayList<Route> population, int generationsToDo, int mutationRate) {
+        super(factory, population, generationsToDo, mutationRate);
         simulateFactory();
     }
 
-    public FancyGAsample(ArrayList<Route> population) {
-        super(population);
+    public FancyGAsample(AbstractFactory factory, ArrayList<Route> population) {
+        super(factory, population);
         simulateFactory();
     }
 

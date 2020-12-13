@@ -11,7 +11,7 @@ import java.util.Random;
 public class GeneticAlgorithm extends Thread{
 
     // factory comes here
-    // AbstractFactory factory;
+    AbstractFactory factory;
 
     // components
     protected Selector selector;        //TODO once factory implemented - change to private
@@ -27,24 +27,24 @@ public class GeneticAlgorithm extends Thread{
 
 
 
-    public GeneticAlgorithm(/*AbstractFactory factory,*/ ArrayList<Route> population, int generationsToDo, int mutationRate) {
-        // this.factory = factory
-        // createAlgorithm();
+    public GeneticAlgorithm(AbstractFactory factory, ArrayList<Route> population, int generationsToDo, int mutationRate) {
+        this.factory = factory;
+        createAlgorithm();
         this.population = population;
         this.generationsToDo = generationsToDo;
         this.mutationRate = mutationRate;
     }
 
-    public GeneticAlgorithm(/*AbstractFactory factory,*/ ArrayList<Route> population) {
-        // this.factory = factory
-        // createAlgorithm();
+    public GeneticAlgorithm(AbstractFactory factory, ArrayList<Route> population) {
+        this.factory = factory;
+        createAlgorithm();
         this.population = population;
     }
 
 
 
     private void createAlgorithm(){
-        // factory.createTheThing(this)
+        factory.createTheThing(this);
     }
 
     @Override

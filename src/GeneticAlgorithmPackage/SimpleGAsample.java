@@ -10,13 +10,13 @@ import java.util.ArrayList;
 
 public class SimpleGAsample extends GeneticAlgorithm {
 
-    public SimpleGAsample(ArrayList<Route> population, int generationsToDo, int mutationRate) {
-        super(population, generationsToDo, mutationRate);
+    public SimpleGAsample(AbstractFactory factory, ArrayList<Route> population, int generationsToDo, int mutationRate) {
+        super(factory, population, generationsToDo, mutationRate);
         simulateFactory();
     }
 
-    public SimpleGAsample(ArrayList<Route> population) {
-        super(population);
+    public SimpleGAsample(AbstractFactory factory, ArrayList<Route> population) {
+        super(factory, population);
         simulateFactory();
     }
 
