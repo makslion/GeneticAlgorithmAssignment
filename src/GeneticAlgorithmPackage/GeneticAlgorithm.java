@@ -132,7 +132,7 @@ public class GeneticAlgorithm extends Thread{
 
         // check for a callback
         if (callback != null){
-            callback.bestRouteCallback(theBestRoute);
+            callback.bestRouteCallback(theBestRoute, factory);
             callback.populationCallback(population);
         }
     }

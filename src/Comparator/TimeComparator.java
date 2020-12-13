@@ -1,6 +1,9 @@
 package Comparator;
 import java.util.ArrayList;
 
+import Factory.AbstractFactory;
+import Factory.FancyGAFactory;
+import Factory.SimpleGAFactory;
 import GeneticAlgorithmPackage.GeneticAlgorithm;
 import Population.Route;
 
@@ -9,38 +12,57 @@ public class TimeComparator extends Comparator {
 	public TimeComparator(ArrayList<Route> initialPopulation) {
 		super(initialPopulation);
 	}
-	
+
+	private long simpleDuration = -1, fancyDuration = -1;
+	private long simpleStartTime, fancyStartTime, simpleEndTime, fancyEndTime;
+
 	@Override
 	public void compare() {
-		ArrayList<GeneticAlgorithm> simpleAlgorithms = new ArrayList<>();
-        long startTime1 = System.nanoTime();
-        for (GeneticAlgorithm ga : simpleAlgorithms)
-            ga.start();
-        long endTime1 = System.nanoTime();
-        long duration1 = (endTime1 - startTime1);
-        System.out.println("simpleGA excution time: "+ duration1);
-        
-        ArrayList<GeneticAlgorithm> fancyAlgorithms = new ArrayList<>();
-        long startTime2 = System.nanoTime();
-        for (GeneticAlgorithm ga : fancyAlgorithms)
-            ga.start();
-        long endTime2 = System.nanoTime();
-        long duration2 = (endTime2 - startTime2);
-        System.out.println("fancyGA excution time: "+ duration2);
-        
-        if(duration1>duration2) {
-        	System.out.println("simpleGA is slower than fancyGA");
-    	}
-    	else if(duration1 == duration2){
-    		System.out.println("same");
-    		System.out.print(duration1 + duration2);
-    	}
-    	else if(duration1<duration2) {
-    		System.out.println("simpleGA is faster than fancyGA");
-    	}
-		
-		
+		GeneticAlgorithm simpleGA = new GeneticAlgorithm(new SimpleGAFactory(), (ArrayList<Route>) initialPopulation.clone());
+		simpleGA.setCallback(this);
+		simpleStartTime = System.nanoTime();
+		simpleGA.start();
+
+		GeneticAlgorithm fancyGA = new GeneticAlgorithm(new FancyGAFactory(), (ArrayList<Route>) initialPopulation.clone());
+		fancyGA.setCallback(this);
+		fancyStartTime = System.nanoTime();
+		fancyGA.start();
 	}
-	
+
+	@Override
+	public void bestRouteCallback(Route bestRoute, AbstractFactory factory) {
+
+		if (factory instanceof SimpleGAFactory){
+			simpleEndTime = System.nanoTime();
+			simpleDuration = simpleEndTime - simpleStartTime;
+		}
+		else if (factory instanceof FancyGAFactory){
+			fancyEndTime = System.nanoTime();
+			fancyDuration = fancyEndTime - fancyStartTime;
+		}
+
+		if (simpleDuration != -1 && fancyDuration != -1)
+			printResults();
+	}
+
+
+
+	@Override
+	protected void printResults() {
+		System.out.println("simpleGA excution time: "+ simpleDuration);
+		System.out.println("fancyGA excution time: "+ fancyDuration);
+
+		if(simpleDuration>fancyDuration) {
+			System.out.println("simpleGA is slower than fancyGA");
+		}
+		else if(simpleDuration == fancyDuration){
+			System.out.println("same");
+			System.out.print(simpleDuration + fancyDuration);
+		}
+		else{
+			System.out.println("simpleGA is faster than fancyGA");
+		}
+	}
+
 
 }
