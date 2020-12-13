@@ -73,8 +73,8 @@ public class ReproducerUniform extends Reproducer{
 
 
 
-        firstRoute = Utilities.filterDuplicates(firstRoute, firstParent.getCityList());
-        secondRoute = Utilities.filterDuplicates(secondRoute, secondParent.getCityList());
+        firstRoute = Utilities.removeDuplicates(firstRoute, firstParent.getCityList());
+        secondRoute = Utilities.removeDuplicates(secondRoute, secondParent.getCityList());
 
         //generate new roads.
         fistChild = new Route(firstParent.getNumberOfCities(), firstParent.getCityList(), firstRoute, firstParent.getrId());

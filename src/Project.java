@@ -1,12 +1,16 @@
-import Comparison.Comparator;
 import Factory.FancyGAFactory;
 import Factory.SimpleGAFactory;
+import GeneticAlgorithmPackage.FancyGAsample;
 import GeneticAlgorithmPackage.GeneticAlgorithm;
+import GeneticAlgorithmPackage.SimpleGAsample;
 import Helpers.Constants;
 import Population.Route;
 import Population.World;
 
 import java.util.ArrayList;
+import Comparator.Comparator;
+import Comparator.ResultComparator;
+import Comparator.TimeComparator;
 
 public class Project {
 
@@ -14,7 +18,7 @@ public class Project {
 
         // demoPopulation();
 
-        // demoGA();
+         //demoGA();
 
         comparatorDemo();
     }
@@ -35,8 +39,15 @@ public class Project {
         World.getInstance().setWorld(Constants.WORLD_SIZE_X, Constants.WORLD_SIZE_Y, Constants.NUMBER_OF_CITIES,Constants.NUMBER_OF_ROUTES);
         ArrayList<Route> initialPopulation = World.getInstance().getRouteList();
 
-        Comparator comparator = new Comparator(initialPopulation);
-        comparator.demoAlgorithms();
+       // Comparator comparator = new Comparator(initialPopulation);
+        //comparator.demoAlgorithms();
+        Comparator timeComparator = new TimeComparator(initialPopulation);
+        timeComparator.compare();
+        
+        Comparator resultComparator = new ResultComparator(initialPopulation);
+        resultComparator.compare();
+      
+        
     }
 
 
