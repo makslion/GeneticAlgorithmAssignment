@@ -9,8 +9,10 @@ import java.util.Random;
 
 public class ReproducerSinglePoint extends Reproducer{
 
-
-
+    /**
+     * Implementation of the {@link Reproducer#doCrossover(Route, Route)}
+     */
+    @Override
     protected ArrayList<Route> doCrossover(Route firstParent, Route secondParent){
         // generate pseudo random int to specify the point for crossover
         int randomInt = new Random().nextInt(firstParent.getRoute().size());

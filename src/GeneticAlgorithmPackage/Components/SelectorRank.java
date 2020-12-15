@@ -8,6 +8,11 @@ import java.util.Comparator;
 
 public class SelectorRank extends Selector{
 
+    /**
+     * Implementation of the {@link Selector#doSelection(ArrayList)}
+     * Sorts population based on the route length in descending order.
+     * Selects top half.
+     */
     @Override
     public ArrayList<Route> doSelection(ArrayList<Route> population) {
 

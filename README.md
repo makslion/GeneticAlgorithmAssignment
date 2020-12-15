@@ -13,7 +13,14 @@
 - [x] Strategy Pattern
 - [x] Genetic Algorithm 
 
+### Features: 
+
+
 ## Changelog:
+
+### version 1.0
+* Refactored and cleaned up code
+* Javadocs added
 
 ### version 0.6
 * Implementation of the Strategy pattern

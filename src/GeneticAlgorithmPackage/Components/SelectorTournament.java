@@ -1,12 +1,18 @@
 package GeneticAlgorithmPackage.Components;
 
 import Helpers.Utilities;
+import Population.Pair;
 import Population.Route;
 
 import java.util.ArrayList;
 
 public class SelectorTournament extends Selector{
 
+    /**
+     * Implementation of the {@link Selector#doSelection(ArrayList)}
+     * Randomly selects two routes from the population.
+     * Selects the fittest from them
+     */
     @Override
     public ArrayList<Route> doSelection(ArrayList<Route> population) {
 
@@ -24,11 +30,11 @@ public class SelectorTournament extends Selector{
         // tournament finishes when all candidates had "fight"
         while (population.size() != 0){
 
-            int [] pairIndexes = Utilities.getRandomIntPair(0, population.size());
+            Pair<Integer, Integer> pair = Utilities.getRandomIntPair(0, population.size());
 
             // randomly select two candidates
-            Route first = population.get(pairIndexes[0]);
-            Route second = population.get(pairIndexes[1]);
+            Route first = population.get(pair.first());
+            Route second = population.get(pair.second());
 
             // "fight" - add the fittest to survivors
             if (first.getRouteLength() < second.getRouteLength())

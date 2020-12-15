@@ -11,6 +11,13 @@ public class ReproducerUniform extends Reproducer{
 
     boolean [] reproductionTemplate;
 
+    /**
+     *  If the default template is not desired this method sets own template
+     *
+     * @param template boolean array of route length.
+     *                 true - inherit from first parent
+     *                 false - inherit from second parent.
+     */
     public void setReproductionTemplate(boolean [] template){
         if (template.length == Constants.NUMBER_OF_CITIES)
             reproductionTemplate = template;
@@ -18,6 +25,9 @@ public class ReproducerUniform extends Reproducer{
             System.err.println("Wrong length. Must match number of cities!");
     }
 
+    /**
+     * Implementation of the {@link Reproducer#doCrossover(Route, Route)}
+     */
     @Override
     protected ArrayList<Route> doCrossover(Route firstParent, Route secondParent) {
         // set default template if wasn't assigned already

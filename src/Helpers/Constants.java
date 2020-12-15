@@ -1,7 +1,14 @@
 package Helpers;
 
+import GeneticAlgorithmPackage.Components.ReproducerUniform;
+import Population.Route;
+
 import java.util.Random;
 
+
+/**
+ * Constants and settings for the whole program
+ */
 public class Constants {
     // world parameters
     public static int NUMBER_OF_CITIES = 50;
@@ -16,7 +23,12 @@ public class Constants {
 
 
 
-
+    /**
+     * Obtain a random template for {@link ReproducerUniform}
+     *
+     * @param len length of the template
+     * @return boolean array (pseudo random values) of the desired length
+     */
     public static boolean[] randomReproductionTemplate(int len) {
         Random random = new Random();
 
@@ -28,6 +40,12 @@ public class Constants {
     }
 
 
+    /**
+     * Obtain a default reproduction template for {@link ReproducerUniform#doCrossover(Route, Route)}
+     *
+     * @param len length of the template
+     * @return boolean array (based on the default template) of the desired length
+     */
     public static boolean[] defaultReproductionTemplate(int len){
         boolean [] template = {true, false};
         boolean [] templateResized = new boolean[len];

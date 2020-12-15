@@ -10,10 +10,15 @@ import Population.Route;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Genetic algorithm implementation.
+ * Extends thread to allow multiple parallel algorithms
+ * with no impact on the performance
+ */
 public class GeneticAlgorithm extends Thread{
 
     // factory comes here
-    AbstractFactory factory;
+    private AbstractFactory factory;
 
     // components
     public Selector selector;
@@ -29,7 +34,15 @@ public class GeneticAlgorithm extends Thread{
     private Thread thread;
 
 
-
+    /**
+     * Constructor to override default parameters
+     *
+     * @param factory Instance of the factory used for the creation of instance of GA
+     * @param population initial population to evolve on
+     * @param generationsToDo number of generations for algorithm before it stops
+     * @param mutationRate rate of the mutation for each city in each route in every generation.
+     *                     Integer value represents percents (0-100)
+     */
     public GeneticAlgorithm(AbstractFactory factory, ArrayList<Route> population, int generationsToDo, int mutationRate) {
         this.factory = factory;
         createAlgorithm();
@@ -38,18 +51,28 @@ public class GeneticAlgorithm extends Thread{
         this.mutationRate = mutationRate;
     }
 
+    /**
+     * Constructor to use default parameters from {@link Constants}
+     *
+     * @param factory Instance of the factory used for the creation of instance of GA
+     * @param population initial population to evolve on
+     */
     public GeneticAlgorithm(AbstractFactory factory, ArrayList<Route> population) {
         this.factory = factory;
         createAlgorithm();
         this.population = population;
     }
 
+    /**
+     * Use {@link AbstractFactory} instance to create this object
+     */
     private void createAlgorithm(){
         factory.createTheThing(this);
     }
 
+
     @Override
-    public synchronized void start() {
+    public void start() {
         if (thread == null) {
             thread = new Thread (this);
             try {
@@ -64,6 +87,10 @@ public class GeneticAlgorithm extends Thread{
         }
     }
 
+    /**
+     * Evolution process. Loop through number of generations
+     * and once done - finalize
+     */
     @Override
     public void run() {
         if(population == null){
@@ -88,6 +115,15 @@ public class GeneticAlgorithm extends Thread{
         }
     }
 
+
+    /**
+     * Mutation phase of the genetic algorithm.
+     * Implemented here as the is only one way to mutate.
+     * Hence, no need to burden a factory and create more classes
+     *
+     * @param population current generation in the genetic algorithm
+     * @return population with mutated cities.
+     */
     private ArrayList<Route> doMutation(ArrayList<Route> population){
 //        System.out.println("doing mutation over: ");
 //        for (Route route : population)
@@ -114,6 +150,11 @@ public class GeneticAlgorithm extends Thread{
 
 
 
+    /**
+     * Called internally after evolution is done
+     * Sores the best route and invokes {@link GeneticAlgorithmCallback} object
+     * if it was set by {@link #setCallback(GeneticAlgorithmCallback)}
+     */
     private void finish(){
 //        System.out.println(this+" done with generations. Saving the besst result");
         Route candidate = null;
@@ -131,18 +172,19 @@ public class GeneticAlgorithm extends Thread{
         theBestRoute = candidate;
 
         // check for a callback
-        if (callback != null){
+        if (callback != null)
             callback.bestRouteCallback(theBestRoute, factory);
-            callback.populationCallback(population);
-        }
     }
 
+
+    /**
+     * Used for demonstration only.
+     * Must not be used in the application - refer instead to the {@link GeneticAlgorithmCallback} interface
+     *
+     * @return the best route if evolution is done. Null if evolution is in proress
+     */
     public Route getTheBestRoute(){
-        if (theBestRoute != null)
-            return theBestRoute;
-//        else
-//            System.err.println("Too early! Haven't got the best route yet");
-        return null;
+        return theBestRoute != null? theBestRoute : null;
     }
 
 

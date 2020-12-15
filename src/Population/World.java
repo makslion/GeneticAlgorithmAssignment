@@ -1,11 +1,18 @@
 package Population;
 
+import GeneticAlgorithmPackage.GeneticAlgorithm;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+
+/**
+ * Instance of the world.
+ * Simulation to obtain data for the {@link GeneticAlgorithm}
+ */
 public class World {
     static private World instance;
 
@@ -29,10 +36,17 @@ public class World {
     
     private World(){
 //        System.out.println("Creating a world.....");
-        
 
     }
-    
+
+    /**
+     * Initialize world
+     *
+     * @param mapSizeX determines X-axis size of the world to be created
+     * @param mapSizeY determines Y-axis size of the word to be created
+     * @param numberOfCities number of cities to place on the map
+     * @param numberOfRoute number of routes to generate from cities
+     */
     public void setWorld(int mapSizeX,int mapSizeY,int numberOfCities,int numberOfRoute){
 //        System.out.println("Population.World size: " + mapSizeX + " X "+ mapSizeY );
 //        System.out.println("Number of Cities: " + numberOfCities + ", Number of route "+ numberOfRoute );
@@ -44,15 +58,6 @@ public class World {
         this.routeList=crateRouteList();
     }
 
-    public int getWorldX(){
-        return this.worldSizeX;
-    }
-    public int getWorldY(){
-        return this.worldSizeY;
-    }
-    public int getNumberOfCities(){
-        return this.numberOfCities;
-    }
     public ArrayList<City> getCityList(){
         return this.cityList;
     }
@@ -61,8 +66,11 @@ public class World {
     }
 
 
+    /**
+     * Populating world with cities
+     */
     public ArrayList<City> crateCityList(){
-        ArrayList<City> cityList = new ArrayList();
+        ArrayList<City> cityList = new ArrayList<>();
         for (int i = 0; i < numberOfCities;i++)
         {
             int xPosition = ThreadLocalRandom.current().nextInt(0, worldSizeX);
@@ -73,8 +81,11 @@ public class World {
         return cityList;
     }
 
+    /**
+     * Generating routes based on number of cities and number of routes
+     */
     public ArrayList<Route> crateRouteList(){
-        ArrayList<Route> routeList = new ArrayList();
+        ArrayList<Route> routeList = new ArrayList<>();
         for(int i=0;i<numberOfRoute;i++){
             ArrayList<Integer> route = IntStream.range(0, numberOfCities).boxed().collect(Collectors.toCollection(ArrayList::new));
             Collections.shuffle(route);

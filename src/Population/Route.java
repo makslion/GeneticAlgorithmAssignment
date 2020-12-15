@@ -1,9 +1,14 @@
 package Population;
 
 
+import GeneticAlgorithmPackage.GeneticAlgorithm;
+
 import java.util.ArrayList;
 
-
+/**
+ * Route object.
+ * Elements of the population for {@link GeneticAlgorithm}
+ */
 public class Route {
     private ArrayList<City> cityList;
     private ArrayList<Integer> route;
@@ -38,7 +43,12 @@ public class Route {
     public int getrId() {
         return rId;
     }
-    
+
+
+    /**
+     * Cost function for the GA.
+     * Calculates length of the route
+     */
     double checkRouteLength(){
 //        System.out.println("Population.Route: "+rId+", path:"+route);
         double totalDistance =0;

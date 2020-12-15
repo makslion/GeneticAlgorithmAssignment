@@ -1,8 +1,7 @@
 import Factory.FancyGAFactory;
 import Factory.SimpleGAFactory;
-import GeneticAlgorithmPackage.FancyGAsample;
+import GeneticAlgorithmPackage.Components.GeneticAlgorithmCallback;
 import GeneticAlgorithmPackage.GeneticAlgorithm;
-import GeneticAlgorithmPackage.SimpleGAsample;
 import Helpers.Constants;
 import Population.Route;
 import Population.World;
@@ -16,14 +15,23 @@ public class Project {
 
     public static void main(String[] args) {
 
-        // demoPopulation();
+        World.getInstance().setWorld(Constants.WORLD_SIZE_X, Constants.WORLD_SIZE_Y, Constants.NUMBER_OF_CITIES,Constants.NUMBER_OF_ROUTES);
+        ArrayList<Route> initialPopulation = World.getInstance().getRouteList();
 
-         //demoGA();
+        Comparator timeComparator = new TimeComparator(initialPopulation);
+        timeComparator.compare();
 
-        comparatorDemo();
+        Comparator resultComparator = new ResultComparator(initialPopulation);
+        resultComparator.compare();
+
+//        demoPopulation();
+//        demoGA();
     }
 
 
+    /**
+     * Demonstration of the population
+     */
     private static void demoPopulation(){
 
         World.getInstance().setWorld(Constants.WORLD_SIZE_X, Constants.WORLD_SIZE_Y, Constants.NUMBER_OF_CITIES,Constants.NUMBER_OF_ROUTES);
@@ -34,23 +42,10 @@ public class Project {
 
     }
 
-
-    private static void comparatorDemo(){
-        World.getInstance().setWorld(Constants.WORLD_SIZE_X, Constants.WORLD_SIZE_Y, Constants.NUMBER_OF_CITIES,Constants.NUMBER_OF_ROUTES);
-        ArrayList<Route> initialPopulation = World.getInstance().getRouteList();
-
-       // Comparator comparator = new Comparator(initialPopulation);
-        //comparator.demoAlgorithms();
-        Comparator timeComparator = new TimeComparator(initialPopulation);
-        timeComparator.compare();
-        
-        Comparator resultComparator = new ResultComparator(initialPopulation);
-        resultComparator.compare();
-      
-        
-    }
-
-
+    /**
+     * Demonstration of the {@link GeneticAlgorithm}
+     * Uses not proper method for obtaining result. Refer to the {@link GeneticAlgorithmCallback} for proper implementation
+     */
     private static void demoGA(){
 
         World.getInstance().setWorld(Constants.WORLD_SIZE_X, Constants.WORLD_SIZE_Y, Constants.NUMBER_OF_CITIES,Constants.NUMBER_OF_ROUTES);
@@ -78,7 +73,7 @@ public class Project {
         ArrayList<Route> simpleBestRoutes = new ArrayList<>();
         ArrayList<Route> fancyBestRoutes = new ArrayList<>();
 
-        // wait until done!
+        // wait until done! It is not a proper way. In the code replaced by the callback
         while (algorithmsYielded < simpleAlgorithms.size()){
             for (GeneticAlgorithm ga : simpleAlgorithms){
                 Route placeHolder = ga.getTheBestRoute();
@@ -86,7 +81,6 @@ public class Project {
                 if (placeHolder != null && !simpleBestRoutes.contains(placeHolder)){
                     algorithmsYielded += 1;
                     simpleBestRoutes.add(placeHolder);
-//                    System.out.println(ga+" simple yielded "+algorithmsYielded);
                 }
             }
         }
@@ -97,8 +91,8 @@ public class Project {
             System.out.println("length: "+route.getRouteLength());
         }
 
-         // literally the same code, but for fancy GA (only name of GAsample changed - everything else the same!!)
 
+         // literally the same code, but for fancy GA (only name of GAsample changed - everything else the same!!)
         algorithmsYielded = 0;
 
         while (algorithmsYielded < fancyAlgorithms.size()){
@@ -109,7 +103,6 @@ public class Project {
                     algorithmsYielded += 1;
 
                     fancyBestRoutes.add(placeHolder);
-//                    System.out.println(ga+" fancy yielded "+algorithmsYielded);
                 }
             }
         }
@@ -119,15 +112,6 @@ public class Project {
             System.out.println(route);
             System.out.println("length: "+route.getRouteLength());
         }
-
-
-
-        // but this is not the "good" way
-        // there are two options i can think about:
-        //      attach an observer to the GeneticAlgorithm
-        //      in finish() inside GeneticAlgorithm send the result where it needed
-        // please, let me (Maksym) know if there is a need of implementation any of them
-        // and I will do it ASAP
     }
     
    

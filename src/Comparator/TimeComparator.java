@@ -14,7 +14,7 @@ public class TimeComparator extends Comparator {
 	}
 
 	private long simpleDuration = -1, fancyDuration = -1;
-	private long simpleStartTime, fancyStartTime, simpleEndTime, fancyEndTime;
+	private long simpleStartTime, fancyStartTime;
 
 	@Override
 	public void compare() {
@@ -33,11 +33,11 @@ public class TimeComparator extends Comparator {
 	public void bestRouteCallback(Route bestRoute, AbstractFactory factory) {
 
 		if (factory instanceof SimpleGAFactory){
-			simpleEndTime = System.nanoTime();
+			long simpleEndTime = System.nanoTime();
 			simpleDuration = simpleEndTime - simpleStartTime;
 		}
 		else if (factory instanceof FancyGAFactory){
-			fancyEndTime = System.nanoTime();
+			long fancyEndTime = System.nanoTime();
 			fancyDuration = fancyEndTime - fancyStartTime;
 		}
 
@@ -46,11 +46,12 @@ public class TimeComparator extends Comparator {
 	}
 
 
-
 	@Override
 	protected void printResults() {
-		System.out.println("simpleGA excution time: "+ simpleDuration);
-		System.out.println("fancyGA excution time: "+ fancyDuration);
+		double simpleDurationSeconds = (double) simpleDuration / 1000000000;
+		double fancyDurationSeconds = (double) fancyDuration / 1000000000;
+		System.out.println("simpleGA execution time: "+ simpleDurationSeconds);
+		System.out.println("fancyGA execution time: "+ fancyDurationSeconds);
 
 		if(simpleDuration>fancyDuration) {
 			System.out.println("simpleGA is slower than fancyGA");
