@@ -1,11 +1,28 @@
-# Genetic Algorithms Assignment
+# Genetic Algorithm
+Assignment for the CS613 — Advanced Concepts in Object-Oriented Programming.
+At National University of Ireland, Maynooth.
+
+### Authors:
+* Zuoyun Jin. 
+   * Student ID: 19252512
+   * Student email: zuoyun.jin.2020@mumail.ie
+* Zixuan Zhang. 
+    * Student ID: 
+    * Student email: zixuan.a.zhang.2019@mumail.ie
+* Maksym Vavilov. 
+    * Student ID: 19252513
+    * Student email: maksym.vavilov.2020@mumail.ie
+  
+
 
 ### Usage: 
 1. Download source code
-2. in _Project.java_ uncomment desired _demo..._ method.
-3. Run _Project.java_ 
-4. Adjust _Utilities.Constants_ to change initial conditions. 
-5. Enjoy
+2. Run _Project.java_ 
+3. Adjust _Utilities.Constants_ to change initial conditions. 
+4. Enjoy
+
+There is way to run only the world demo or GA demo. To do so, uncomment demoPopulation() 
+or demoGA() in the _Project.main()_ 
 
 ### Requirements:
 - [x] Singleton Pattern
@@ -14,7 +31,21 @@
 - [x] Genetic Algorithm 
 
 ### Features: 
-
+* Strategy pattern - refer to the Comparator package
+* Abstract Factory - refer to the Factory package
+* Genetic Algorithm - refer to the GeneticAlgorithmPackage package
+    * Single point and Uniform reproducers.
+    Refer to the ReproducerSinglePoint and ReproducerUniform 
+    at the GeneticAlgorithmPackage.Components package respectively.
+    * Rank and Tournament selectors. 
+    Refer to the SelectorRank and SelectorTournament
+    at the GeneticAlgorithmPackage.Components package respectively.
+* Callback interface for the Genetic Algorithm. Used to provide
+the best Route to the Comparator. Refer to the GeneticAlgorithmPackage.Components.
+* Singleton pattern. Refer to the Population.World class. 
+* Parameterised class and Generics. Refer to the Population.Pair class.
+* Threading. Refer to the GeneticAlgorithmPackage.GeneticAlgorithm
+ 
 
 ## Changelog:
 

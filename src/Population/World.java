@@ -12,6 +12,12 @@ import java.util.stream.IntStream;
 /**
  * Instance of the world.
  * Simulation to obtain data for the {@link GeneticAlgorithm}
+ *
+ * Uses a Singleton pattern.
+ * Creation of the world is computationally expensive and there is no need
+ * in creating different versions of the world for each of the {@link GeneticAlgorithm}
+ * instances.
+ * Is a thread safe as {@link #getInstance()} is synchronized and uses double-checked locking
  */
 public class World {
     static private World instance;
